@@ -17,20 +17,20 @@ class BinarySearchTree {
   }
 
   add(data) {
-    this.head = addWithin(this.head, value);
+    this.head = addWithin(this.head, data);
 
-    function addWithin(node, value) {
+    function addWithin(node, data) {
       if (!node) {
-        return new Node(value);
+        return new Node(data);
       }
-      if(node.value === value) {
+      if(node.data === data) {
         return node;
       }
 
-      if (value < node.value) {
-        node.left = addWithin(node.left, value);
+      if (data < node.data) {
+        node.left = addWithin(node.left, data);
       } else {
-        node.right = addWithin(node.right, value);
+        node.right = addWithin(node.right, data);
       }
 
       return node;
@@ -39,8 +39,17 @@ class BinarySearchTree {
   }
 
   has(data) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    return searchThat(this.head, value);
+    function searchThat(node, value) {
+      if (!node) {
+        return false;
+      }
+      if (node.value === value) {
+        return true;
+      }
+
+      return value < node.value ? searchThat(node.left, value) : searchThat(node.right, value);
+    }
   }
 
   find(/* data */) {
